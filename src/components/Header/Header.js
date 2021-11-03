@@ -1,10 +1,12 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+import React from "react";
+import styled from "styled-components/macro";
 
-import { COLORS, WEIGHTS } from '../../constants';
-import Logo from '../Logo';
-import SuperHeader from '../SuperHeader';
-import MobileMenu from '../MobileMenu';
+import { COLORS, WEIGHTS, QUERIES } from "../../constants";
+import Logo from "../Logo";
+import SuperHeader from "../SuperHeader";
+import MobileMenu from "../MobileMenu";
+import UnstyledButton from "../UnstyledButton";
+import Icon from "../Icon";
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
@@ -22,12 +24,25 @@ const Header = () => {
           <Logo />
         </Side>
         <Nav>
-          <NavLink href="/sale">Sale</NavLink>
-          <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/women">Women</NavLink>
-          <NavLink href="/kids">Kids</NavLink>
-          <NavLink href="/collections">Collections</NavLink>
+          <NavWrapper>
+            <NavLink href="/sale">Sale</NavLink>
+            <NavLink href="/new">New&nbsp;Releases</NavLink>
+            <NavLink href="/men">Men</NavLink>
+            <NavLink href="/women">Women</NavLink>
+            <NavLink href="/kids">Kids</NavLink>
+            <NavLink href="/collections">Collections</NavLink>
+          </NavWrapper>
+          <MobileNavWrapper>
+            <UnstyledButton>
+              <Icon id="shopping-bag" strokeWidth={1} />
+            </UnstyledButton>
+            <UnstyledButton>
+              <Icon id="search" strokeWidth={1} />
+            </UnstyledButton>
+            <UnstyledButton onClick={() => setShowMobileMenu(true)}>
+              <Icon id="menu" strokeWidth={1} />
+            </UnstyledButton>
+          </MobileNavWrapper>
         </Nav>
         <Side />
       </MainHeader>
@@ -50,12 +65,21 @@ const MainHeader = styled.div`
 
 const Nav = styled.nav`
   display: flex;
+
   gap: 48px;
   margin: 0px 48px;
+
+  @media ${QUERIES.tabletAndDown} {
+    margin: 0px;
+    margin-left: auto;
+  }
 `;
 
 const Side = styled.div`
   flex: 1;
+  @media ${QUERIES.tabletAndDown} {
+    flex: 0;
+  }
 `;
 
 const NavLink = styled.a`
@@ -67,6 +91,27 @@ const NavLink = styled.a`
 
   &:first-of-type {
     color: ${COLORS.secondary};
+  }
+`;
+
+const NavWrapper = styled.div`
+  display: flex;
+  gap: 48px;
+  @media ${QUERIES.tabletAndDown} {
+    display: none;
+  }
+`;
+
+const MobileNavWrapper = styled.div`
+  display: none;
+
+  @media ${QUERIES.tabletAndDown} {
+    display: flex;
+    gap: 32px;
+  }
+  @media ${QUERIES.phoneAndDown} {
+    display: flex;
+    gap: 28px;
   }
 `;
 
