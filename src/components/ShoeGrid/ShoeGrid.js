@@ -1,8 +1,9 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+import React from "react";
+import styled from "styled-components/macro";
+import { QUERIES } from "../../constants";
 
-import SHOES from '../../data';
-import ShoeCard from '../ShoeCard';
+import SHOES from "../../data";
+import ShoeCard from "../ShoeCard";
 
 const ShoeGrid = () => {
   return (
@@ -29,6 +30,10 @@ const Wrapper = styled.div`
 
     margin: 16px;
   */
+
+  @media ${QUERIES.phoneAndDown} {
+    margin-top: -12px;
+  }
 `;
 
 const ShoeWrapper = styled.div`
